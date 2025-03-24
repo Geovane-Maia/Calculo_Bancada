@@ -18,6 +18,12 @@ function realizarCalculo(event) {
     const espelhoEsquerda = parseFloat(document.getElementById('espelhoEsquerda').value) || 0;  
     const espelhoDireita = parseFloat(document.getElementById('espelhoDireita').value) || 0;  
 
+    // modelo violão, se escolhido como sim, adição de 30
+    const modeloViolao = document.getElementById('modeloViolao').checked;  
+    if (modeloViolao) {  
+        custoBancada += 30;  
+    }
+
     // Valida se todos os valores numéricos são válidos  
     if (isNaN(tamanhoFrente) || isNaN(tamanhoLateral) || isNaN(valorPedra)) {  
         alert("Por favor, preencha todos os campos numéricos corretamente.");  

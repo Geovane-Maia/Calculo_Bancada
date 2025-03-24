@@ -11,8 +11,8 @@ body {
 }
 
 header {
-  background: #007bff;
-  color: white;
+  background: rgb(250, 118, 10);
+  color: black;
   text-align: center;
   padding: 20px 0;
   margin-bottom: 20px;
@@ -60,7 +60,7 @@ select:focus {
 
 button {
   padding: 10px;
-  background: #28a745;
+  background: rgb(250, 118, 10);
   color: white;
   border: none;
   border-radius: 5px;
@@ -93,7 +93,7 @@ footer {
   margin-left: 10px;
   font-size: 16px;
   color: white;
-  background: #28a745;
+  background: rgb(250, 118, 10);
   transition: color 0.3s;
   margin-top: 10px;
   margin-left: 0px;
