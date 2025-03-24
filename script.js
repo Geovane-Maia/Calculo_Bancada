@@ -20,6 +20,8 @@ function realizarCalculo(event) {
         return;  
     }    
     
+    // Calcula o valor do custo total da bancada
+    
     const frenteTotal = tamanhoFrente + (espelhoEsquerda + espelhoDireita) / 100;
     const lateralTotal = tamanhoLateral + (espelhoFrente + espelhoAtras) / 100;
     const metrosQuadrados = frenteTotal * lateralTotal;
@@ -37,3 +39,49 @@ function realizarCalculo(event) {
     document.getElementById('areaProjetoResultado').textContent = metrosQuadrados.toFixed(2);  
     document.getElementById('valorTotalResultado').textContent = custoBancada.toFixed(2);  
 }
+function toggleEspelhos() {
+    const select = document.getElementById('temEspelhos');
+    const espelhos = document.querySelectorAll('.espelho');
+
+    if (select.value === "sim") {
+        espelhos.forEach(espelho => {
+            espelho.style.display = "block";
+        });
+    } else {
+        espelhos.forEach(espelho => {
+            espelho.style.display = "none";
+        });
+    }
+}
+
+// copiarResultado para area de transferencia
+
+function copiarResultado() {
+    const resultado = document.getElementById('resultado');
+    if (!resultado) {
+        alert("Nenhum resultado encontrado para copiar.");
+        return;
+    }
+
+    let texto = "";
+
+    // Coleta todas as informações dentro do resultado
+    resultado.querySelectorAll("p").forEach(p => {
+        texto += p.textContent + "\n";
+    });
+
+    // Cria um elemento de área de transferência temporário
+    const textarea = document.createElement("textarea");
+    textarea.value = texto;
+    document.body.appendChild(textarea);
+    textarea.select();
+    document.execCommand("copy");
+    document.body.removeChild(textarea);
+
+    alert("Resultado copiado para a área de transferência.");
+}
+
+
+
+
+
