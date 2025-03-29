@@ -1,141 +1,99 @@
-    <!DOCTYPE html>  
-    <html lang="pt-BR">  
-    <head>  
-        <meta charset="UTF-8">  
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">  
-        <title>Cálculo de Bancada</title>  
-        <link rel="stylesheet" href="styles.css">  
-        <script src="script.js" defer></script>  
-    </head>  
-    <body>  
-        <header>  
-            <h1>Cálculo de Bancada <br> Ximenes Construções</h1>  
-            <p>Preencha as informações para calcular o valor da sua bancada.</p>  
-        </header>  
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cálculo de Bancada</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <header>
+        <h1>Cálculo de Bancada <br> Ximenes Construções</h1>
+        <p>Preencha as informações para calcular o valor da sua bancada.</p>
+    </header>
+    
+    <main>
+        <h1>Formulário de Pedido</h1>
+        <form id="formulario" onsubmit="realizarCalculo(event)">
+            <label for="nomeCliente">Nome do cliente:</label>
+            <input type="text" id="nomeCliente" required><br><br>
+            
+            <label for="telefoneCliente">Telefone do cliente:</label>
+            <input type="tel" id="telefoneCliente" required><br><br>
+            
+            <label for="vendedor">Vendedor:</label>
+            <input type="text" id="vendedor" required><br><br>
+            
+            <label for="tipoPedra">Tipo de pedra:</label>
+            <select id="tipoPedra" required>
+                <option value="ubatuba">Ubatuba</option>
+                <option value="marmoreBranco">Mármore Branco</option>
+                <option value="travertino">Travertino</option>
+                <option value="pretoSaoGabriel">Preto São Gabriel</option>
+                <option value="cinzaAndorinha">Cinza Andorinha</option>
+            </select><br><br>
+            
+            <label for="valorPedra">Valor da Pedra (R$):</label>
+            <input type="text" id="valorPedra" required><br><br>
+            
+            <label for="modeloViolao">Modelo violão:</label>
+            <select id="modeloViolao" required>
+                <option value="sim">Sim</option>
+                <option value="não">Não</option>
+            </select><br><br>
+            
+            <label for="tamanhoFrente">Tamanho de frente (m):</label>
+            <input type="text" id="tamanhoFrente" required><br><br>
+            
+            <label for="tamanhoLateral">Tamanho de lateral (m):</label>
+            <input type="text" id="tamanhoLateral" required><br><br>
+            
+            <label for="temEspelhos">Tem espelhos?</label>
+            <select id="temEspelhos" onchange="toggleEspelhos()">
+                <option value="sim">Sim</option>
+                <option value="não" selected>Não</option>
+            </select><br><br>
+            <div class="espelho">
+                <label for="espelhoAtras">Espelho atrás (cm):</label>
+                <input type="text" id="espelhoAtras"><br><br>
+            </div>
+            <div class="espelho">
+                <label for="espelhoEsquerda">Espelho na esquerda (cm):</label>
+                <input type="text" id="espelhoEsquerda"><br><br>
+            </div>
+            <div class="espelho">
+                <label for="espelhoDireita">Espelho na direita (cm):</label>
+                <input type="text" id="espelhoDireita"><br><br>
+            </div>
+            
+            <label for="valorCuba">Valor da Cuba (R$):</label>
+            <input type="text" id="valorCuba"><br><br>
+            
+            <label for="temFuroTorneira">Tem furo de torneira?</label>
+            <select id="temFuroTorneira">
+                <option value="sim">Sim</option>
+                <option value="não" selected>Não</option>
+            </select><br><br>
+            
+            <button type="submit">Calcular</button>
+        </form>
+
+        <div id="resultado" class="resultado">
+            <p>Nome do cliente: <span id="nomeResultado"></span></p>
+            <p>Telefone do cliente: <span id="telefoneResultado"></span></p>
+            <p>Vendedor: <span id="vendedorResultado"></span></p>
+            <p>Tipo de pedra: <span id="tipoPedraResultado"></span></p>
+            <p>Valor da pedra: R$ <span id="valorPedraResultado"></span></p>
+            <p>M² do Projeto: <span id="areaProjetoResultado"></span> m²</p>
+            <p>Valor Total: R$ <span id="valorTotalResultado"></span></p>
+        </div>
         
-        <main>  
-            <h1>Formulário de Pedido</h1>  
-            <form id="formulario" onsubmit="realizarCalculo(event)">  
-                <label for="nomeCliente">Nome da cliente:</label>  
-                <input type="text" id="nomeCliente" name="nomeCliente" required=""><br><br>  
-                
-                <label for="telefoneCliente">Telefone da cliente:</label>  
-                <input type="tel" id="telefoneCliente" name="telefoneCliente" required=""><br><br>  
-                
-                <label for="vendedor">Vendedor:</label>  
-                <input type="text" id="vendedor" name="vendedor" required=""><br><br>  
-                
-                <label for="tipoPedra">Tipo de pedra:</label>  
-                <select id="tipoPedra" name="tipoPedra" required="">  
-                    <option value="ubatuba">Ubatuba</option>  
-                    <option value="marmoreBranco">Mármore Branco</option>  
-                    <option value="travertino">Travertino</option>  
-                    <option value="pretoSaoGabriel">Preto São Gabriel</option>  
-                    <option value="cinzaAndorinha">Cinza Andorinha</option>  
-                </select><br><br>  
-
-                <label for="valorPedra">Valor da Pedra (R$):</label>  
-                <input type="text" id="valorPedra" name="valorPedra" required=""><br><br>  
-
-                <label for="modeloViolao">Modelo violão:</label>  
-                <select id="modeloViolao" name="modeloViolao" required="">  
-                    <option value="sim">Sim</option>  
-                    <option value="não">Não</option>  
-                </select><br><br>
-                
-                <label for="tamanhoFrente">Tamanho de frente em Mt, cm:</label>  
-                <input type="text" id="tamanhoFrente" name="tamanhoFrente" required=""><br><br>  
-
-                <label for="tamanhoLateral">Tamanho de lateral em Mt, cm:</label>  
-                <input type="text" id="tamanhoLateral" name="tamanhoLateral" required=""><br><br>  
-
-                <label for="temEspelhos">Tem espelhos:</label>  
-                <select id="temEspelhos" name="temEspelhos" required="" onchange="toggleEspelhos()">  
-                    <option value="sim">Sim</option>  
-                    <option value="não" selected="">Não</option>  
-                </select><br><br>  
-
-                <div class="espelho" style="display: none;">  
-                    <label for="espelhoFrente">Espelho na frente cm:</label>  
-                    <input type="text" id="espelhoFrente" name="espelhoFrente">  
-                    <select name="espelhoFrenteTipo">  
-                        <option value="paraCima">Para cima ↑</option>  
-                        <option value="paraBaixo">Para baixo ↓</option>  
-                        <option value="comTopo">Com topo -|</option>  
-                        <option value="simples">Simples -</option>  
-                    </select><br><br>  
-                </div>  
-
-                <div class="espelho" style="display: none;">  
-                    <label for="espelhoAtras">Espelho atrás cm:</label>  
-                    <input type="text" id="espelhoAtras" name="espelhoAtras">  
-                    <select name="espelhoAtrasTipo">  
-                        <option value="paraCima">Para cima ↑</option>  
-                        <option value="paraBaixo">Para baixo ↓</option>  
-                        <option value="comTopo">Com topo -|</option>  
-                        <option value="simples">Simples -</option>  
-                    </select><br><br>  
-                </div>   
-
-                <div class="espelho">  
-                    <label for="espelhoEsquerda">Espelho na esquerda cm:</label>  
-                    <input type="text" id="espelhoEsquerda" name="espelhoEsquerda">  
-                    <select name="espelhoEsquerdaTipo">  
-                        <option value="paraCima">Para cima ↑</option>  
-                        <option value="paraBaixo">Para baixo ↓</option>  
-                        <option value="comTopo">Com topo -|</option>  
-                        <option value="simples">Simples -</option>  
-                    </select><br><br>  
-                </div>  
-
-                <div class="espelho">  
-                    <label for="espelhoDireita">Espelho na direita cm:</label>  
-                    <input type="text" id="espelhoDireita" name="espelhoDireita">  
-                    <select name="espelhoDireitaTipo">  
-                        <option value="paraCima">Para cima ↑</option>  
-                        <option value="paraBaixo">Para baixo ↓</option>  
-                        <option value="comTopo">Com topo -|</option>  
-                        <option value="simples">Simples -</option>  
-                    </select><br><br>  
-                </div>  
-
-                <label for="valorCuba">Valor da Cuba:</label>  
-                <input type="text" id="valorCuba" name="valorCuba"><br><br>  
-
-                <label for="temFuroTorneira">Tem furo de torneira:</label>  
-                <select id="temFuroTorneira" name="temFuroTorneira" required="">  
-                    <option value="sim">Sim</option>  
-                    <option value="não" selected="">Não</option>  
-                </select><br><br>  
-
-                <button type="submit">Calcular</button>  
-            </form>  
-
-            <div id="resultado" class="resultado">   
-                <div>  
-                    <p>Nome do cliente: <span id="nomeResultado"></span></p>  
-                    <br>  
-                    <p>Telefone do cliente: <span id="telefoneResultado"></span></p>  
-                    <br>  
-                    <p>Vendedor: <span id="vendedorResultado"></span></p>  
-                    <br>  
-                    <p>Tipo de pedra: <span id="tipoPedraResultado"></span></p>  
-                    <br>  
-                    <p>Valor da pedra: <span id="valorPedraResultado"></span></p>  
-                    <br>  
-                    <p>M² do Projeto: <span id="areaProjetoResultado"></span> m²</p>   
-                    <br>   
-                    <p>Valor Total: <span id="valorTotalResultado"></span> R$</p>  
-                    <br>  
-                </div>  
-                <!-- O resultado do cálculo será exibido aqui -->  
-            </div>  
-            <!-- botão para copiar o resultado -->  
-            <button class="copiar" onclick="copiarResultado()">Copiar Resultado</button>  
-        </main>  
-
-        <footer>  
-            <p>&copy; 2025 Ximenes Construções.</p>  
-        </footer>  
-    </body>  
-    </html>  
+        <button class="copiar" onclick="copiarResultado()">Copiar Resultado</button>
+    </main>
+    
+    <footer>
+        <p>&copy; 2025 Ximenes Construções.</p>
+    </footer>
+</body>
+</html>
